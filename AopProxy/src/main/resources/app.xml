@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contenxt="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+
+">
+    <contenxt:component-scan base-package="com.coh"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/db0?characterEncoding=utf-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.coh.pojo"/>
+    </bean>
+
+    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+        <property name="basePackage" value="com.coh.dao"/>
+    </bean>
+
+    <!--
+    AOP 配置
+    1. 添加命名空间
+    2.添加切面
+    -->
+    <bean id="MyAOP" class="com.coh.service.MyAOP"/>
+    <aop:config>
+        <!-- 关联到切面类       -->
+        <aop:aspect ref="MyAOP">
+            <!--  配置切入点    -->
+            <aop:pointcut id="pc" expression="execution(* com.coh.service..*(..))"/>
+            <!--通知配置 around包括所有-->
+<!--            <aop:before method="before" pointcut-ref="pc"/>-->
+<!--            <aop:after method="after" pointcut-ref="pc"/>-->
+<!--            <aop:after-throwing method="exception" pointcut-ref="pc"/>-->
+<!--            <aop:after-returning method="afterReturning" pointcut-ref="pc"/>-->
+            <aop:around method="around" pointcut-ref="pc"/>
+
+        </aop:aspect>
+
+    </aop:config>
+
+
+</beans>
