@@ -1,6 +1,7 @@
 package com.coh.service.impl;
 
 import com.coh.dao.CarDao;
+import com.coh.pojo.Car;
 import com.coh.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,10 @@ public class CarServiceImpl implements CarService {
 
         System.out.println("carServiceImpl.delete");
 //        int a=1/0;
+    }
+
+    @Override
+    public void save2(Car car) {
+
     }
 }

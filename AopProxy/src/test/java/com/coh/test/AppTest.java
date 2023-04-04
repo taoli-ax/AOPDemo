@@ -28,4 +28,16 @@ public class AppTest {
         CarService carService= (CarService) applicationContext.getBean("carServiceImpl2");
         carService.save();
     }
+
+    @Test
+    public void txTest(){
+
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("app3.xml");
+        CarService carService=(CarService) applicationContext.getBean("carServiceImpl3");
+        Car car=new Car();
+        car.setName("Trailblazer2");
+        car.setBrand("chevrolet");
+        carService.save2(car);
+
+    }
 }
