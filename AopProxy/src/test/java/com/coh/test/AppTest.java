@@ -1,5 +1,6 @@
 package com.coh.test;
 
+import com.coh.config.JavaConfig;
 import com.coh.pojo.Car;
 import com.coh.service.CarService;
 import com.coh.service.CarServiceImplProxy;
@@ -9,6 +10,7 @@ import com.coh.service.impl.CarServiceImpl3;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class AppTest {
@@ -50,6 +52,13 @@ public class AppTest {
         proxyFactory.setTarget(new CarServiceImpl3());
         proxyFactory.addAdvice(new MyAdvice());
         CarService carService=(CarService) proxyFactory.getProxy();
+        carService.save();
+    }
+
+    @Test
+    public void testJavaConfig(){
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(JavaConfig.class);
+        CarService carService=(CarService) applicationContext.getBean("carServiceImpl4");
         carService.save();
     }
 
