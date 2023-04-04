@@ -17,6 +17,7 @@ public class CarServiceImpl3 implements CarService {
     public CarServiceImpl3(CarDao carDao){
         this.carDao=carDao;
     }
+    public CarServiceImpl3(){}
     @Override
     public void save2(Car car) {
         carDao.insert(car);

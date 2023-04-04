@@ -96,3 +96,7 @@ public class CarServiceImpl3 implements CarService {
     }
 }
 ```
+
+
+### 事务的工厂方法 ProxyFactory
+通过代理工厂方法生成代理对象
