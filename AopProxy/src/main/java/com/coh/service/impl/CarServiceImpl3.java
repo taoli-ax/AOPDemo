@@ -22,6 +22,9 @@ public class CarServiceImpl3 implements CarService {
         this.carDao=carDao;
     }
 
+    public CarServiceImpl3() {
+    }
+
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = false,rollbackForClassName = "java.lang.RunTimeException")
     @Override
     public void save2(Car car) {
