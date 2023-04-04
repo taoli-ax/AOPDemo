@@ -5,8 +5,12 @@ import com.coh.pojo.Car;
 import com.coh.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CarServiceImpl3 implements CarService {
     @Autowired
     private CarDao carDao;
@@ -17,6 +21,7 @@ public class CarServiceImpl3 implements CarService {
     public CarServiceImpl3(CarDao carDao){
         this.carDao=carDao;
     }
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = false,rollbackForClassName = "java.lang.RunTimeException")
     @Override
     public void save2(Car car) {
         carDao.insert(car);

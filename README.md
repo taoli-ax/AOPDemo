@@ -43,7 +43,7 @@ Learning AOP
 | 不可重复 |            |               |    |
 
 
-### 事务的配置
+### 事务的配置 XML
 **mysql事务管理器**
 ```xml
 
@@ -68,4 +68,31 @@ Learning AOP
     <aop:pointcut id=".." expression="..."/>
     <aop:advisor advice-ref="advice" pointcut-ref="..."/>
 </aop:config>
+```
+
+### 事务配置 annotation
+- 配置transactionManager 和 自动代理
+
+```xml
+
+<bean id="transactionManger" class="...DataSourceTransactionManager">
+    <properties name="dataSource" ref="dataSource"/>
+</bean>
+<tx:annotation-driven transaction-manager="transactionManager"/>
+```
+- 注解  `@Transactional`
+```java
+@Service
+@Transactional
+public class CarServiceImpl3 implements CarService {
+    @Autowired
+    private CarDao carDao;
+    
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false, rollbackForClassName = "java.lang.RunTimeException")
+    @Override
+    public void save2(Car car) {
+        carDao.insert(car);
+        throw new RuntimeException("exception! rollback");
+    }
+}
 ```
