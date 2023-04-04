@@ -35,7 +35,8 @@
     <!--
     AOP 配置
     1. 添加命名空间
-    2.添加切面
+    2.添加切面类到spring
+    3. 配置切面
     -->
     <bean id="MyAOP" class="com.coh.service.MyAOP"/>
     <aop:config>

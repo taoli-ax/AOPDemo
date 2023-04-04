@@ -21,4 +21,11 @@ public class AppTest {
         carService.save();
         carService.delete();
     }
+
+    @Test
+    public void testAspectJ(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("app2.xml");
+        CarService carService= (CarService) applicationContext.getBean("carServiceImpl2");
+        carService.save();
+    }
 }
