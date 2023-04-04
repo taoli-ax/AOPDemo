@@ -3,8 +3,11 @@ package com.coh.test;
 import com.coh.pojo.Car;
 import com.coh.service.CarService;
 import com.coh.service.CarServiceImplProxy;
+import com.coh.service.MyAdvice;
 import com.coh.service.impl.CarServiceImpl;
+import com.coh.service.impl.CarServiceImpl3;
 import org.junit.Test;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,4 +43,14 @@ public class AppTest {
         carService.save2(car);
 
     }
+    @Test
+    public void TestProxyFactoryPrevious(){
+        ProxyFactory proxyFactory=new ProxyFactory();
+        // 通知+目标对象=代理对象
+        proxyFactory.setTarget(new CarServiceImpl3());
+        proxyFactory.addAdvice(new MyAdvice());
+        CarService carService=(CarService) proxyFactory.getProxy();
+        carService.save();
+    }
+
 }
