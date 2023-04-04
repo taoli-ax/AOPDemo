@@ -46,27 +46,11 @@
             <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" read-only="false" rollback-for="java.lang.RuntimeException"/>
         </tx:attributes>
     </tx:advice>
-    <!--
-    AOP 配置
-    1. 添加命名空间
-    2.添加切面类到spring
-    3. 配置切面
-    -->
+    <!--AOP 配置-->
     <bean id="myAOP" class="com.coh.service.MyAOP"/>
     <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.coh.service..*(..))"/>
         <aop:advisor advice-ref="advice" pointcut-ref="pc"/>
-        <!-- 关联到切面类       -->
-        <aop:aspect ref="myAOP">
-            <!--  配置切入点    -->
-            <aop:pointcut id="pc" expression="execution(* com.coh.service..*(..))"/>
-            <!--通知配置 around包括所有-->
-<!--            <aop:before method="before" pointcut-ref="pc"/>-->
-<!--            <aop:after method="after" pointcut-ref="pc"/>-->
-<!--            <aop:after-throwing method="exception" pointcut-ref="pc"/>-->
-<!--            <aop:after-returning method="afterReturning" pointcut-ref="pc"/>-->
-            <aop:around method="around" pointcut-ref="pc"/>
-
-        </aop:aspect>
 
     </aop:config>
 

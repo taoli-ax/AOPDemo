@@ -1,5 +1,6 @@
 package com.coh.service;
 
+import com.coh.pojo.Car;
 import com.coh.service.impl.CarServiceImpl;
 
 public class CarServiceImplProxy implements CarService {
@@ -18,6 +19,11 @@ public class CarServiceImplProxy implements CarService {
 
     @Override
     public void delete() {
+
+    }
+
+    @Override
+    public void save2(Car car) {
 
     }
 }
