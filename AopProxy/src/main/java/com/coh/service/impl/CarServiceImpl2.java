@@ -6,16 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CarServiceImpl implements CarService {
-//    @Autowired
-//    private CarDao carDao;
-//
-//    public void setCarDao(CarDao carDao) {
-//        this.carDao = carDao;
-//    }
-//    public CarServiceImpl(CarDao carDao){
-//        this.carDao=carDao;
-//    }
+public class CarServiceImpl2 implements CarService {
 
     public void save() {
         System.out.println("carServiceImpl.save");
